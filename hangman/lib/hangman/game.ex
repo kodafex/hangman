@@ -1,9 +1,10 @@
 defmodule Hangman.Game do
 
   defstruct(
-    turns_left: 10,
+    turns_left: 7,
     game_state: :initializing,
     letters:    [],
+    word_length: 0,
     guesses:    MapSet.new(),
   )
 
@@ -13,7 +14,8 @@ defmodule Hangman.Game do
 
   def new_game(word) do
     %Hangman.Game{
-      letters: word |> String.codepoints
+      letters: word |> String.codepoints,
+      word_length: String.length(word),
     }
   end
 
@@ -30,8 +32,10 @@ defmodule Hangman.Game do
     %{
       game_state: game.game_state,
       turns_left: game.turns_left,
+      word: game.letters |> Enum.join(" "),
       letters: game.letters |> reveal_guessed(game.guesses),
-      guesses: game.guesses,
+      word_length: game.word_length,
+      guesses: MapSet.to_list(game.guesses),
     }
   end
 

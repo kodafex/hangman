@@ -1,7 +1,9 @@
-<%= inspect(@tally) %>
-<p>
-Turns left: <%= @tally.turns_left %>
-</p>
-<p>
-Letters: <%= @tally.letters |> Enum.join(" ") %>
-</p>
+<%= game_state(@tally.game_state) %>
+<div class="row">
+  <div class="column column-40">
+    <%= render("_gallows.html", left: @tally.turns_left) %>
+  </div>
+  <div class="column column-50 column-offset-10">
+    <%= render("_status.html", tally: @tally, conn: @conn) %>
+  </div>
+</div>

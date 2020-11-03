@@ -7,7 +7,7 @@ defmodule GameTest do
   test "new_game" do
     game = Game.new_game()
     assert game.game_state == :initializing
-    assert game.turns_left == 10
+    assert game.turns_left == 7
     assert length(game.letters) > 0
   end
 
